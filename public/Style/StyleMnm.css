@@ -1,0 +1,86 @@
+:root {
+  --size: 100px;
+}
+
+.mnm {
+  margin-left: 5em;
+  background-color: rgba(147, 215, 255, 0.2);
+  width: 100% - 4em;
+  height: auto;
+  display: flex;
+  align-items: stretch;
+  overflow: visible;
+}
+.text1 p {
+  font-size: 150%;
+}
+.text h1 {
+  font-size: 2vw;
+}
+.text .ypografi h3 {
+  font-size: 1.9vw;
+}
+.text .ypografi h4 {
+  font-size: 1.7vw;
+}
+
+.mnm .text1 {
+  margin: 40px 10px 40px 10px;
+  max-width: 60%;
+  max-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.mnm .sev {
+  height: auto;
+  width: 100%;
+  position: relative;
+
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+.mnm .sev img {
+  max-width: 150%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+}
+@media screen and (max-width: 1300px) {
+  .mnm {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mnm .sev img {
+    max-width: 40%;
+    height: auto;
+    position: static;
+  }
+  .mnm .sev {
+    max-height: calc(var(--size) * 3);
+  }
+
+  .text1 p {
+    font-size: 200%;
+  }
+  .text h1 {
+    font-size: 4vw;
+  }
+  .text .ypografi h3 {
+    font-size: 2.5vw;
+  }
+  .text .ypografi h4 {
+    font-size: 2.4vw;
+  }
+  @media only screen and (max-width: 756px) {
+    .mnm {
+      margin-left: 4em;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.logoHead {
+  margin-left: 3em;
+  display: flex;
+  height: 80px;
+  width: 100% - 3em;
+
+  color: rgb(136, 0, 0);
+
+  align-items: center;
+  justify-content: center;
+}
+
+.logoHead img {
+  margin: 0 20px 0 20px;
+  height: 60px;
+  width: 60px;
+}
+
+@media only screen and (max-width: 950px) {
+  .logoHead h1 {
+    display: none;
+  }
+  .logoHead {
+    margin-left: 2em;
+  }
+}

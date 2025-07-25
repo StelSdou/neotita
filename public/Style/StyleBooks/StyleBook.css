@@ -1,0 +1,42 @@
+.books {
+  margin: 1em 0 1em 5em;
+  height: auto;
+}
+.books .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 500px));
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 50px;
+}
+.titles {
+  max-width: 300px;
+}
+.grid .book {
+  /* border: 1px solid; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.book a {
+  text-decoration: none;
+  color: rgb(153, 0, 0);
+}
+
+.grid .img {
+  transition: 0.9s ease;
+  width: auto;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+.grid .book:hover .img {
+  opacity: 0.5;
+}
+@media only screen and (max-width: 750px) {
+  .books {
+    margin-left: 4em;
+  }
+}

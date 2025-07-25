@@ -1,0 +1,77 @@
+.cards {
+  color: black;
+  margin-left: 5em;
+  display: grid;
+  height: auto;
+  grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+  justify-items: center;
+  gap: 10px;
+}
+
+.cards img {
+  width: 3em;
+  height: auto;
+  transition: 0.5s;
+}
+
+.click a {
+  color: black;
+  text-decoration: none;
+}
+
+.c {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width: 25vw;
+  height: auto;
+
+  text-align: center;
+  align-content: center;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.here {
+  margin-bottom: 5px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+.click {
+  width: 10ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.line {
+  border: 1px solid black;
+  visibility: hidden;
+  width: 0%;
+  transition: 0.2s;
+}
+
+.c:hover {
+  transform: translateY(-25px);
+  img {
+    width: 4em;
+  }
+}
+
+.here:hover {
+  .line {
+    visibility: visible;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 756px) {
+  .cards {
+    margin-left: 4em;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .c {
+    width: 70%;
+  }
+}
