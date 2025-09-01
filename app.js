@@ -1,5 +1,5 @@
 // varibles
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -7,7 +7,7 @@ const app = express();
 // DataBase
 require('dotenv').config();
 const conn = mysql.createPool({
-  host: process.env.DB_HOST_PUBLIC,
+  host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
@@ -17,7 +17,7 @@ const conn = mysql.createPool({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
 app.get('/helps', (req, res) => {
@@ -29,7 +29,7 @@ app.get('/plan', (req, res) => {
 });
 
 app.get('/booklibr', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'library.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 //apis
@@ -47,7 +47,10 @@ app.get('/covers/:name', (req, res) => {
 app.get('/api/book/:year', async (req, res) => {
   const param = parseInt(req.params.year, 10);
   try {
-    const [rows] = await conn.query('SELECT * FROM books WHERE year = ?;', param);
+    const [rows] = await conn.query(
+      'SELECT * FROM books WHERE year = ?;',
+      [param]
+    );
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -57,10 +60,7 @@ app.get('/api/book/:year', async (req, res) => {
 
 
 // 404 handler
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
-});
-
+app.use((req, res) => { res.status(404).sendFile(path.join(__dirname, 'public', '404.html')); });
 // 500 handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
