@@ -14,38 +14,44 @@ const conn = mysql.createPool({
 });
 
 // Serve index.html for other routes
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+  res.sendFile(path.join(__dirname, 'build', 'home.html'));
 });
 
 app.get('/helps', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'katixHelp.html'));
+  res.sendFile(path.join(__dirname, 'build', 'katixHelp.html'));
 });
 
 app.get('/plan', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'plan.html'));
+  res.sendFile(path.join(__dirname, 'build', 'plan.html'));
 });
 
 app.get('/booklibr', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'library.html'));
 });
+
+app.get('/book', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'book.html'));
+})
 
 //apis
 app.get('/covers/:name', (req, res) => {
+  console.log("you are in covers");
   const param = req.params.name + ".png";
-  const imgPath = path.join(__dirname, 'public', 'covers', param)
+  const imgPath = path.join(__dirname, 'build', 'covers', param)
 
   res.sendFile(imgPath, (err) => {
     if (err){
-      res.status(404).sendFile(path.join(__dirname, 'public', 'covers', '0000.jpg'))
+      res.status(404).sendFile(path.join(__dirname, 'build', 'covers', '0000.jpg'))
     }
   });
 });
 
 app.get('/api/book/:year', async (req, res) => {
   const param = parseInt(req.params.year, 10);
+  console.log("You are in books with year = " + param)
   try {
     const [rows] = await conn.query(
       'SELECT * FROM books WHERE year = ?;',
@@ -60,11 +66,11 @@ app.get('/api/book/:year', async (req, res) => {
 
 
 // 404 handler
-app.use((req, res) => { res.status(404).sendFile(path.join(__dirname, 'public', '404.html')); });
+app.use((req, res) => { res.status(404).sendFile(path.join(__dirname, 'build', '404.html')); });
 // 500 handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-    res.status(500).sendFile(path.join(__dirname, 'public', 'public/500.html'));
+    res.status(500).sendFile(path.join(__dirname, 'build', 'build/500.html'));
 });
 
 const PORT = process.env.PORT || 3000;
