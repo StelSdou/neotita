@@ -1,17 +1,18 @@
 .members{
-    margin-left: 5em;
+    margin-left: 4em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    text-align: center;
 }
 
 .members .list{
-    margin-left: 2em;
+    /*margin-left: 2em;*/
     width: 50%;
 }
 
-.members li{
-    margin-top: 1.1em;
+.members .mem{
+  margin-top: 1.1em;
 }
