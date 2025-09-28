@@ -37,6 +37,30 @@ app.get('/book', (req, res) => {
 })
 
 //apis
+app.get('/img/carousel/:name', (req, res) => {
+  const param = req.params.name + ".jpg";
+  const imgPath = path.join(__dirname, 'build', 'carousel', param);
+
+  res.sendFile(imgPath, (err) => {
+    if (err){
+      res.status(404);
+    }
+  });
+});
+
+
+app.get('/api/carousel', async (req, res) => {
+  try {
+    const [rows] = await conn.query(
+      'SELECT img, title FROM carousel WHERE deadLine = "0000-00-00" OR deadLine >= CURDATE();'
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
 app.get('/covers/:name', (req, res) => {
   console.log("you are in covers");
   const param = req.params.name + ".png";
@@ -70,7 +94,7 @@ app.use((req, res) => { res.status(404).sendFile(path.join(__dirname, 'build', '
 // 500 handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-    res.status(500).sendFile(path.join(__dirname, 'build', 'build/500.html'));
+    res.status(500).sendFile(path.join(__dirname, 'build', '500.html'));
 });
 
 const PORT = process.env.PORT || 3000;
